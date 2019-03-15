@@ -8,6 +8,8 @@
  */
 function getCalendarData( props ) {
   const { year, month, day, type = 0 } = props || {};
+
+  // 星期列表，根据type的不同使用
   const WEEKLIST = [{
     cn: [ '星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六' ],
     cns: [ '日', '一', '二', '三', '四', '五', '六' ],
@@ -18,6 +20,7 @@ function getCalendarData( props ) {
     en: [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ]
   }];
 
+  // 根据type不同得到真正的索引值
   const getTrueIndex = index => {
     return type === 1 ? index === 0 ? 6 : index - 1 : index;
   };
@@ -35,24 +38,25 @@ function getCalendarData( props ) {
   const prevMonthTotalDays = moment( `${thisYear}-${thisMonth}-${thisDay}`, 'YYYY-M-D' ).subtract( 1, 'M' ).daysInMonth();
   // 取得当月第一天星期几的索引
   let thisFirstDayInWeek = moment( `${thisYear}-${thisMonth}-1`, 'YYYY-M-D' ).day();
-  // 根据type不同得到真正的索引值
   thisFirstDayInWeek = getTrueIndex( thisFirstDayInWeek );
   // 取得当月最后一天星期几的索引
   let thisLastDayInWeek = moment( `${thisYear}-${thisMonth}-${thisMonthTotalDays}`, 'YYYY-M-D' ).day();
-  // 根据type不同得到真正的索引值
   thisLastDayInWeek = getTrueIndex( thisLastDayInWeek );
   
   // 上月在当月日历面板中的排列
   for ( let i = 0; i < thisFirstDayInWeek; i++ ) {
-    // 获取上月在当月的各天数
+    // 根据当前月份得到上月的实际月份
+    const trueMonth = thisMonth - 1 > 0 ? thisMonth - 1 : 12;
+    // 根据当前月份得到上月的实际年份
+    const trueYear = thisMonth - 1 > 0 ? thisYear : thisYear - 1;
+    // 获取上月在当前月份具体的日期数
     const day = prevMonthTotalDays - thisFirstDayInWeek + i + 1;
-    // 根据月份判断实际年份，并且找出当天在星期中的索引
-    let prevIndex = moment( `${thisMonth - 1 > 0 ? thisYear : ( thisYear - 1 )}-${thisMonth - 1 > 0 ? thisMonth - 1 : 12}-${day}`, 'YYYY-M-D' ).day();
-    // 根据type不同得到真正的索引值
+    // 找出当天在星期中的索引
+    let prevIndex = moment(`${trueYear}-${trueMonth}-${day}`, 'YYYY-M-D' ).day();
     prevIndex = getTrueIndex( prevIndex );
     dayArrays.push({
-      year: thisMonth - 1 !== 0 ? thisYear : ( thisYear - 1 ),
-      month: thisMonth - 1 > 0 ? thisMonth - 1 : 12,
+      year: trueYear,
+      month: trueMonth,
       day,
       isPrevMonth: true,
       weekDay: {
@@ -84,12 +88,16 @@ function getCalendarData( props ) {
 
   //下月在当月日历面板中的排列
   for ( let i = 1; i <= ( type === 0 ? ( 6 - thisLastDayInWeek ) : thisLastDayInWeek + 1 ); i++ ) {
-    // 根据月份判断实际年份，并且找出当天在星期中的索引
-    let nextIndex = moment( `${thisMonth + 1 < 13 ? thisYear : ( thisYear + 1 )}-${thisMonth + 1 < 13 ? thisMonth + 1 : 1}-${i}`, 'YYYY-M-D' ).day();
+    // 根据当前月份得到上月的实际月份
+    const trueMonth = thisMonth + 1 < 13 ? thisMonth + 1 : 1;
+    // 根据当前月份得到上月的实际年份
+    const trueYear = thisMonth + 1 < 13 ? thisYear : thisYear + 1;
+    // 找出当天在星期中的索引
+    let nextIndex = moment(`${trueYear}-${trueMonth}-${i}`, 'YYYY-M-D' ).day();
     nextIndex = getTrueIndex( nextIndex );
     dayArrays.push({
-      year: thisMonth + 1 < 13 ? thisYear : ( thisYear + 1 ),
-      month: thisMonth + 1 < 13 ? thisMonth + 1 : 1,
+      year: trueYear,
+      month: trueMonth,
       day: i,
       isNextMonth: true,
       weekDay: {
@@ -102,17 +110,24 @@ function getCalendarData( props ) {
 
   //判断数组长度是否为42（日历中，上月天数+当月天数+下月天数=42）个别月份会出现数组长度为35即结束循环，此处强制使日历天数为42天
   if ( dayArrays.length < 42 ) {
+    // 根据当前月份得到上月的实际月份
+    const trueMonth = thisMonth + 1 < 13 ? thisMonth + 1 : 1;
+    // 根据当前月份得到上月的实际年份
+    const trueYear = thisMonth + 1 < 13 ? thisYear : thisYear + 1;
+    // 获取下月日期列表
     const data = dayArrays.filter( item => item.isNextMonth );
-    const lastDay = data.length === 0 ? 1 : data[data.length - 1].day + 1;
+    // 获取新添加日期的第一天
+    const firstDay = data.length === 0 ? 1 : data[data.length - 1].day + 1;
+    // 获取数组长度
     const length = dayArrays.length;
     for ( let i = 0; i < 42 - length; i++ ) {
-      // 根据月份判断实际年份，并且找出当天在星期中的索引
-      let nextIndex = moment( `${thisMonth + 1 < 13 ? thisYear : ( thisYear + 1 )}-${thisMonth + 1 < 13 ? thisMonth + 1 : 1}-${lastDay + i}`, 'YYYY-M-D' ).day();
+      // 找出当天在星期中的索引
+      let nextIndex = moment(`${trueYear}-${trueMonth}-${firstDay + i}`, 'YYYY-M-D' ).day();
       nextIndex = getTrueIndex( nextIndex );
       dayArrays.push({
-        year: thisMonth + 1 < 13 ? thisYear : ( thisYear + 1 ),
-        month: thisMonth + 1 < 13 ? thisMonth + 1 : 1,
-        day: lastDay + i,
+        year: trueYear,
+        month: trueMonth,
+        day: firstDay + i,
         isNextMonth: true,
         weekDay: {
           cn: WEEKLIST[type].cn[nextIndex],
