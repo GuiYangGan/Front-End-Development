@@ -140,4 +140,3 @@ function getCalendarData( props ) {
 
   return dayArrays;
 }
-
