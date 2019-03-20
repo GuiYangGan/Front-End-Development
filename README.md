@@ -4,12 +4,17 @@
 ## Canledar
 用于获取日历数据列表，列表长度42（即42天）
 
+支持两种数据格式
+> 0: 每周第一天为星期日
+>
+> 1: 每周第一天为星期一
+
 需自行下载或安装[moment](http://momentjs.cn/ "moment.js中文网")依赖
-##### Example
+##### Usage
 ```js
-getCalendarData(); // 默认根据当前日期计算日历，且每周第一天为星期日
+getCalendarData(); // 默认根据当前日期计算日历，数据格式为0
 ```
-或
+##### Customize
 ```js
-getCalendarData({ year: 2019, month: 4, day: 1, type: 0 }); // type: 表示每周第一天为星期日或星期一
+getCalendarData({ year: 2019, month: 4, day: 1, type: 0 }); // type: 表示数据格式
 ```
