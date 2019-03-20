@@ -1,1 +1,67 @@
 
+// CSS对Chrome浏览器滚动条的处理
+&::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+&::-webkit-scrollbar-track {
+  border-radius: 2px;
+}
+&::-webkit-scrollbar-thumb {
+  background: #d9dbdf;
+  border-radius: 0;
+}
+
+// 空心三角箭头，本例箭头向左
+.arrow {
+  border-right: 2px solid #343c99;
+  border-top: 2px solid #343c99;
+  border-left: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  height: 10px;
+  width: 10px;
+  margin:50px auto 0;
+  transform: rotate(deg);
+  -webkit-transform: rotate(0deg);
+}
+
+// 实心箭头
+.test {
+  width:0;
+  height: 0;
+  border-top: 100px solid red ;
+  border-bottom: 100px solid blue;
+  border-left: 100px solid green;
+  border-right: 100px solid yellow;
+}
+
+// 设置四周阴影
+box-shadow: 0 0 20px #ccc;
+
+// 开发中碰到在IOS下div的滚动条滚动不流畅
+.css{
+  overflow:auto;/* winphone8和android4+ */
+  -webkit-overflow-scrolling: touch; /* ios5+ */
+}
+
+/**
+ * antd Table省略号
+ * <div title={unescape( text || '' )} className={styles.note}>
+ *   {unescape( text || '' )}
+ * </div>
+ */
+.note {
+  width: 270px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  @media screen and (min-width: 1501px){
+    width: 310px;
+  }
+  @media screen and (min-width: 1601px){
+    width: 410px;
+  }
+  @media screen and (min-width: 1701px){
+    width: 430px;
+  }
+}
