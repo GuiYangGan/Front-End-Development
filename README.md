@@ -5,5 +5,5 @@
 用于获取日历数据列表，列表长度42（即42天）
 ##### Example
 ```js
-getCanledar({ year: 2019, month: 4, day: 1, type: 0 });
+getCalendarData({ year: 2019, month: 4, day: 1, type: 0 });
 ```
