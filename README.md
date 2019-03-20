@@ -9,7 +9,7 @@
 >
 > 1: 每周第一天为星期一
 
-需自行下载或安装[moment](http://momentjs.cn/ "moment.js中文网")依赖
+必须下载或安装依赖[moment.js](http://momentjs.cn/ "moment.js中文网")
 ##### Usage
 ```js
 getCalendarData(); // 默认根据当前日期计算日历，数据格式为0
