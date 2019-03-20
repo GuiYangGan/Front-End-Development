@@ -19,5 +19,8 @@ getCalendarData(); // 默认根据当前日期计算日历，数据格式为0
 getCalendarData({ year: 2019, month: 4, day: 1, type: 0 }); // type: 表示数据格式
 ```
 
+## Javascript
+js方法的集合，工作中的常用方法汇总
+
 ## Css
 css实用小技巧汇总，工作中ant design组件样式修改
