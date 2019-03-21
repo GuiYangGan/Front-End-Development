@@ -20,11 +20,11 @@ css实用小技巧汇总，工作中ant design组件样式修改
 > 1: 每周第一天为星期一
 
 必须下载或安装依赖[moment.js](http://momentjs.cn/ "moment.js中文网")
-##### Usage
+###### Usage
 ```js
 getCalendarData(); // 默认根据当前日期计算日历，数据格式为0
 ```
-##### Customize
+###### Customize
 ```js
 getCalendarData({ year: 2019, month: 4, day: 1, type: 0 }); // type: 表示数据格式
 ```
