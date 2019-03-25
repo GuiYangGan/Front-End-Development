@@ -76,7 +76,7 @@ function getCalendarData( props ) {
       year: thisYear,
       month: thisMonth,
       day: i,
-      selected: i === thisDay,
+      currentDay: i === Number(moment().format('D')),
       isThisMonth: true,
       weekDay: {
         cn: WEEKLIST[type].cn[thisIndex],
@@ -137,6 +137,25 @@ function getCalendarData( props ) {
       });
     }
   }
+
+  // 处理数组结构 array = [6][7]
+  let newArrays = new Array(6);
+  for (let i = 0; i < newArrays.length; i++) {
+    newArrays[i] = new Array();
+  }
+  let n = 0;
+  let m = 6;
+  dayArrays.forEach((item, index) => {
+    if (n > 5) {
+      return;
+    }
+    newArrays[n].push(item);
+    if (index !== 0 && index % m === 0) {
+      n++;
+      m = m + 7;
+    }
+  });
+  dayArrays = newArrays;
 
   return dayArrays;
 }
