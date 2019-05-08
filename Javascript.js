@@ -6,6 +6,14 @@ const newData = data.reduce(( acc, val ) => {
   return acc;
 }, []);
 
+// 去重
+const arr1 = [1, 2, 1, 2, 3, 5, 4, 5, 3, 4, 4, 4, 4];
+const arr2 = arr1.filter( (element, index, self) => {
+    return self.indexOf( element ) === index;
+});
+console.log( arr2 ); // [1, 2, 3, 5, 4]
+console.log( arr1 ); // [1, 2, 1, 2, 3, 5, 4, 5, 3, 4, 4, 4, 4]
+
 // 数组求和
 const arry = [1,2,3,4];
 const total = arr => arr.reduce((acc, val) => acc + val, 0);
