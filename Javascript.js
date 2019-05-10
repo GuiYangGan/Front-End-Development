@@ -1,6 +1,3 @@
-/**
-* 灵活运用JavaScript开发技巧，参考https://juejin.im/post/5cc7afdde51d456e671c7e48?utm_source=gold_browser_extension
-*/
 
 // JS数组去除重复元素或者对象
 const hash = {};
