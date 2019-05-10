@@ -8,6 +8,8 @@
 ## Javascript
 js方法的集合，工作中的常用方法汇总
 
+> [灵活运用JavaScript开发技巧](https://juejin.im/post/5cc7afdde51d456e671c7e48?utm_source=gold_browser_extension)
+
 ## Css
 css实用小技巧汇总，工作中ant design组件样式修改
 
