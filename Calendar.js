@@ -1,4 +1,6 @@
 
+import moment from 'moment';
+
 /**
  * @export
  * @param {number} year   年
@@ -6,8 +8,11 @@
  * @param {number} day    日
  * @param {number} type   用于判断日历第一个是星期日还是星期一，默认为0：第一个为星期日
  */
-function getCalendarData( props ) {
-  const { year, month, day, type = 0 } = props || {};
+export function getCalendarData( date, type = 0 ) {
+
+  const year = Number( moment( date, 'YYYY-MM-DD' ).format( 'YYYY' ));
+  const month = Number( moment( date, 'YYYY-MM-DD' ).format( 'M' ));
+  const day = Number( moment( date, 'YYYY-MM-DD' ).format( 'D' ));
 
   // 星期列表，根据type的不同使用
   const WEEKLIST = [{
@@ -33,7 +38,7 @@ function getCalendarData( props ) {
   // 取得天
   const thisDay = day || Number( moment().format( 'D' ));
   // 取得当月总天数
-  const thisMonthTotalDays = moment( `${thisYear}-${thisMonth}-${thisDay}`, 'YYYY-M-D'  ).daysInMonth();
+  const thisMonthTotalDays = moment( `${thisYear}-${thisMonth}-${thisDay}`, 'YYYY-M-D' ).daysInMonth();
   // 取得上月总天数
   const prevMonthTotalDays = moment( `${thisYear}-${thisMonth}-${thisDay}`, 'YYYY-M-D' ).subtract( 1, 'M' ).daysInMonth();
   // 取得当月第一天星期几的索引
@@ -42,7 +47,7 @@ function getCalendarData( props ) {
   // 取得当月最后一天星期几的索引
   let thisLastDayInWeek = moment( `${thisYear}-${thisMonth}-${thisMonthTotalDays}`, 'YYYY-M-D' ).day();
   thisLastDayInWeek = getTrueIndex( thisLastDayInWeek );
-  
+
   // 上月在当月日历面板中的排列
   for ( let i = 0; i < thisFirstDayInWeek; i++ ) {
     // 根据当前月份得到上月的实际月份
@@ -52,7 +57,7 @@ function getCalendarData( props ) {
     // 获取上月在当前月份具体的日期数
     const day = prevMonthTotalDays - thisFirstDayInWeek + i + 1;
     // 找出当天在星期中的索引
-    let prevIndex = moment(`${trueYear}-${trueMonth}-${day}`, 'YYYY-M-D' ).day();
+    let prevIndex = moment( `${trueYear}-${trueMonth}-${day}`, 'YYYY-M-D' ).day();
     prevIndex = getTrueIndex( prevIndex );
     dayArrays.push({
       year: trueYear,
@@ -76,7 +81,7 @@ function getCalendarData( props ) {
       year: thisYear,
       month: thisMonth,
       day: i,
-      currentDay: i === Number(moment().format('D')),
+      currentDay: i === Number( moment().format( 'D' )),
       isThisMonth: true,
       weekDay: {
         cn: WEEKLIST[type].cn[thisIndex],
@@ -93,7 +98,7 @@ function getCalendarData( props ) {
     // 根据当前月份得到上月的实际年份
     const trueYear = thisMonth + 1 < 13 ? thisYear : thisYear + 1;
     // 找出当天在星期中的索引
-    let nextIndex = moment(`${trueYear}-${trueMonth}-${i}`, 'YYYY-M-D' ).day();
+    let nextIndex = moment( `${trueYear}-${trueMonth}-${i}`, 'YYYY-M-D' ).day();
     nextIndex = getTrueIndex( nextIndex );
     dayArrays.push({
       year: trueYear,
@@ -122,7 +127,7 @@ function getCalendarData( props ) {
     const length = dayArrays.length;
     for ( let i = 0; i < 42 - length; i++ ) {
       // 找出当天在星期中的索引
-      let nextIndex = moment(`${trueYear}-${trueMonth}-${firstDay + i}`, 'YYYY-M-D' ).day();
+      let nextIndex = moment( `${trueYear}-${trueMonth}-${firstDay + i}`, 'YYYY-M-D' ).day();
       nextIndex = getTrueIndex( nextIndex );
       dayArrays.push({
         year: trueYear,
@@ -139,23 +144,23 @@ function getCalendarData( props ) {
   }
 
   // 处理数组结构 array = [6][7]
-  let newArrays = new Array(6);
-  for (let i = 0; i < newArrays.length; i++) {
+  let newArrays = new Array( 6 );
+  for ( let i = 0; i < newArrays.length; i++ ) {
     newArrays[i] = new Array();
   }
   let n = 0;
   let m = 6;
-  dayArrays.forEach((item, index) => {
-    if (n > 5) {
+  dayArrays.forEach(( item, index ) => {
+    if ( n > 5 ) {
       return;
     }
-    newArrays[n].push(item);
-    if (index !== 0 && index % m === 0) {
+    newArrays[n].push( item );
+    if ( index !== 0 && index % m === 0 ) {
       n++;
       m = m + 7;
     }
   });
-  dayArrays = newArrays;
+  dayArrays = newArrays; // [].concat( ...newArrays );
 
   return dayArrays;
 }
