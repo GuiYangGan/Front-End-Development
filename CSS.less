@@ -65,3 +65,30 @@
     width: 430px;
   }
 }
+
+// 手机网页1px边框处理
+.border-1px(@position, @color: #d2d2d2) {
+  position: relative;
+  &::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200%;
+    @{position}:1px solid @color;
+    color: @color;
+    height: 200%;
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    pointer-events: none; /* 防止点击触发 */
+    box-sizing: border-box;
+    @media screen and (min-device-pixel-ratio:3),(-webkit-min-device-pixel-ratio:3){
+      width: 303%;
+      height: 303%;
+      -webkit-transform: scale(0.33);
+      transform: scale(0.33);
+    }
+  }
+}
