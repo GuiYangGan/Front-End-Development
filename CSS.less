@@ -46,6 +46,11 @@
 
 /**
  * antd Table省略号
+ * <div style={{ width: '100%', position: 'relative' }}>
+ *   <div className="oe" style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', height: 16, width: '100%' }}>
+ *     {text}
+ *   </div>
+ * </div>
  */
 .oe {
   overflow: hidden;
@@ -53,11 +58,6 @@
   vertical-align: bottom;
   text-overflow: ellipsis;
 }
-<div style={{ width: '100%', position: 'relative' }}>
-  <div className="oe" style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', height: 16, width: '100%' }}>
-    {text}
-  </div>
-</div>
 
 // 手机网页1px边框处理
 .border-1px(@position, @color: #d2d2d2) {
