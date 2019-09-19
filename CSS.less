@@ -46,25 +46,18 @@
 
 /**
  * antd Table省略号
- * <div title={unescape( text || '' )} className={styles.note}>
- *   {unescape( text || '' )}
- * </div>
  */
-.note {
-  width: 270px;
+.oe {
   overflow: hidden;
-  text-overflow:ellipsis;
   white-space: nowrap;
-  @media screen and (min-width: 1501px){
-    width: 310px;
-  }
-  @media screen and (min-width: 1601px){
-    width: 410px;
-  }
-  @media screen and (min-width: 1701px){
-    width: 430px;
-  }
+  vertical-align: bottom;
+  text-overflow: ellipsis;
 }
+<div style={{ width: '100%', position: 'relative' }}>
+  <div className="oe" style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', height: 16, width: '100%' }}>
+    {text}
+  </div>
+</div>
 
 // 手机网页1px边框处理
 .border-1px(@position, @color: #d2d2d2) {
