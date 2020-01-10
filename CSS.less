@@ -119,3 +119,25 @@
     background-color: #fff;
 }
 
+// CSS实现loading旋转效果
+.loading {
+    width: 46px;
+    height: 46px;
+    border: 1px solid #d9d9d9;
+    border-top-color: #217346;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin 1s infinite linear;
+}
+.spin {
+    0% {
+        transform: rotate(0);
+        -webkit-transform: rotate(0);
+    }
+    100% {
+        transform: rotate(1turn);
+        -webkit-transform: rotate(1turn);
+    }
+}
+
