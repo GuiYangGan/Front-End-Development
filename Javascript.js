@@ -51,3 +51,7 @@ const treeFormat = data => {
     };
   }) : [];
 };
+
+// 正则匹配
+/vid=([^]*)/i.exec('https://v.qq.com/txp/iframe/player.html?vid=o3033d1zk5s')
+/\/([^/]*)==/i.exec('http://player.youku.com/embed/XNDQ2NTYyMjc2MA==')
