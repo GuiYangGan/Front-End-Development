@@ -45,4 +45,4 @@ function wave($canvasID, $progress, $maveColor, $time) {
   move();
 }
 
-wave("canvas1", 180, "#f9b67e", 4000);
+wave("canvas1", 180, "#00c9f8", 4000);
