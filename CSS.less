@@ -150,3 +150,26 @@ box-shadow: 5px 0 5px -5px black, -5px 0 5px -5px black;
     }
 }
 
+// css改变默认checkbox样式
+// html
+<input type="checkbox" id="hello">
+<label for="hello">hello</label>
+// css
+input[type="checkbox"]{
+  display:none;
+}
+input[type="checkbox"] + label:before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border:1px solid;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 8px;
+  transition: all .5s;
+}
+input[type="checkbox"]:checked + label:before {
+  background: red;
+}
+
