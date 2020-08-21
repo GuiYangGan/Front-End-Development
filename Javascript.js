@@ -4,13 +4,13 @@
 */
 
 // javascript判断页面是否在iframe中
-if (self.frameElement && self.frameElement.tagName == "IFRAME") {
+if (self.frameElement && self.frameElement.tagName === 'IFRAME') {
   alert('在iframe中')
 }
-if (window.frames.length != parent.frames.length) {
+if (window.frames.length !== parent.frames.length) {
   alert('在iframe中')
 }
-if (self != top) { 
+if (self !== top) { 
   alert('在iframe中')
 }
 
