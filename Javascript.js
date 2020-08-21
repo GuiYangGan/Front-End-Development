@@ -3,6 +3,16 @@
 * 角度 = 弧度 * 180 / Math.PI
 */
 
+// javascript判断页面是否在iframe中
+if (self.frameElement && self.frameElement.tagName == "IFRAME") {
+  alert('在iframe中')
+}
+if (window.frames.length != parent.frames.length) {
+  alert('在iframe中')
+}
+if (self != top) { 
+  alert('在iframe中')
+}
 
 // JS数组去除重复元素或者对象
 const hash = {};
