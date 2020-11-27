@@ -69,6 +69,21 @@ box-shadow: 5px 0 5px -5px black, -5px 0 5px -5px black;
 }
 
 // 手机网页1px边框处理
+1、
+1px分割线：
+p {
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><line x1='0' y1='100%' x2='100%' y2='100%' stroke='red' /></svg>");
+}
+1px边框：
+div {
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect width='100%' height='100%' fill='none' stroke='red' /></svg>");
+}
+1px带圆角的边框：
+div {
+  border-radius:5px;
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect width='100%' height='100%' rx='5' fill='none' stroke='red' /></svg>");
+}
+2、
 .border-1px(@position, @color: #d2d2d2) {
   position: relative;
   &::after{
