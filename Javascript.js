@@ -62,3 +62,34 @@ const treeFormat = data => {
 // 正则匹配
 /vid=([^]*)/i.exec('https://v.qq.com/txp/iframe/player.html?vid=o3033d1zk5s')
 /\/([^/]*)==/i.exec('http://player.youku.com/embed/XNDQ2NTYyMjc2MA==')
+
+/**
+ * 根据指定宽度截取字符串
+ * @param desc 原始字符串
+ * @param width 该显示的宽度
+ * @param fontsize 字体大小  12px
+ * @returns {string} 截取后的字符串
+ */
+export function getStrByWith (desc, width, fontsize) {
+  var span = document.createElement('span')
+  span.id = 'cut'
+  span.style.visibility = 'hidden'
+  span.style.fontSize = fontsize
+  span.style.whiteSpace = 'nowrap'
+  document.body.appendChild(span)
+  var boo = false
+  var temp = '' // 存放截断字符串
+  for (var j = 0; j < desc.length; j++) {
+    // desc是目标字符串，
+    temp += desc[j]
+    span.innerText = temp
+    if (span.offsetWidth > width) {
+      boo = true
+      break
+    }
+  }
+  document.body.removeChild(span)
+  if (boo) temp += '..'
+  return temp
+}
+
