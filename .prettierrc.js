@@ -1,3 +1,5 @@
+// 'prettier/prettier': ['off', {}, { usePrettierrc: true }]
+
 module.exports = {
 	printWidth: 120,
 	tabWidth: 2,
