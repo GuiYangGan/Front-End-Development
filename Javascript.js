@@ -33,6 +33,25 @@ const total = arr => arr.reduce((acc, val) => acc + val, 0);
 // 两个数组的交集
 const similarity = ( arr1, arr2 ) => arr1.filter( arr => arr2.includes( arr ));
 
+// 一次遍历生成树结构
+const arrayToTree = (data) => {
+  let res = null
+  const map = {} 
+
+  data.forEach(item => {
+    const {id, parentId} = item
+    map[parentId] = map[parentId] || []
+    if (!res && parentId === 0) {
+      res = map[parentId]
+
+    }
+    map[parentId].push(item)
+    item.children = map[id] || (map[id] = [])
+  });
+	
+  return res || []
+}
+
 // 生成树形结构数据
 const treeFormat = data => {
   // 找到根节点
